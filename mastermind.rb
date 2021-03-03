@@ -7,4 +7,4 @@ require './codebreaker'
 require './codemaker'
 require './pins'
 
-Game.new
+Game.new.play
