@@ -18,6 +18,7 @@ class Text
     choice
   end
 
-  def codebreaker_intro
+  def self.codebreaker_intro
+    puts "Hey there, here's the code you need to guess:"
   end
 end
