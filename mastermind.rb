@@ -11,6 +11,9 @@ require 'pry'
 
 # Game.color
 
-6.times {|num| puts Display.code_colors(num.to_s)}
+6.times { |num| puts Display.code_pegs(num.to_s) }
+
+puts Display.key_pegs('correct_position')
+puts Display.key_pegs('incorrect_position')
 
 Game.new.play
