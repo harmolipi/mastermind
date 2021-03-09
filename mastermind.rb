@@ -16,4 +16,9 @@ require 'pry'
 # puts Display.key_pegs('correct_position')
 # puts Display.key_pegs('incorrect_position')
 
-Game.new.play
+replay = true
+
+while replay
+  Game.new.play
+  replay = Text.play_again?
+end

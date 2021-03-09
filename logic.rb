@@ -1,12 +1,8 @@
 # frozen_string_literal: true
 
 class Logic
-  def self.check_game_type(answer)
-    answer.match?(/^\d$/)
-  end
-
-  def self.check_codebreaker_guess(guess)
-    guess.match?(/^\d{4}$/)
+  def self.check_input(text, pattern)
+    text.match?(pattern)
   end
 
   def self.generate_code
@@ -28,7 +24,7 @@ class Logic
     puts "\n"
     Display.display_code(guess)
 
-    return if Logic.won?(code, guess)
+    # return if Logic.won?(code, guess)
 
     code.each_index do |index|
       if code[index] == guess[index]
@@ -37,12 +33,12 @@ class Logic
       end
     end
 
-    return if clues['correct_position'] == 4
+    # return if clues['correct_position'] == 4
 
     diff = [0, 1, 2, 3].difference(keys)
 
     # make another array of indices we don't want to check and maybe with each iteration check that it's not one of those indices
-    if diff.empty?
+    if diff.empty? && clues['correct_position'] != 4
       guess.each do |guess_num|
         code.each_with_index do |code_num, index|
           if !already_matched.include?(index) && guess_num == code_num
@@ -53,7 +49,7 @@ class Logic
         end
       end
 
-    else
+    elsif clues['correct_position'] != 4
       diff.each do |guess_index|
         diff.each do |code_index|
           if !already_matched.include?(code_index) && code[code_index] == guess[guess_index]
@@ -75,6 +71,7 @@ class Logic
     # puts "\n"
     # Display.display_code(guess)
     Display.display_key(clues)
+    return if Logic.won?(code, guess)
   end
 
   def self.won?(code, guess)

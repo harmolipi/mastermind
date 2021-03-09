@@ -7,11 +7,14 @@ class Codebreaker
   def self.play
     # Text.codebreaker_intro
     @@code = Logic.generate_code
+    counter = 1
     Display.display_code(@@code)
     @@rounds.times do |i|
+      counter = i + 1
       break if game_loop(i + 1)
     end
-    Codebreaker.ending
+    # Codebreaker.ending
+    Text.ending(@@code, @@guess, counter)
   end
 
   def self.game_loop(round_number)
