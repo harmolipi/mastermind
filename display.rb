@@ -16,4 +16,13 @@ class Display
       'incorrect_position' => "\u25CB"
     }[key]
   end
+
+  def self.display_code(code)
+    code.each { |num| print Display.code_pegs(num) }
+  end
+
+  def self.display_key(key_code)
+    key_code['correct_position'].times { print Display.key_pegs('correct_position') }
+    key_code['incorrect_position'].times { print Display.key_pegs('incorrect_position') }
+  end
 end
