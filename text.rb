@@ -43,6 +43,26 @@ class Text
     guess.split('')
   end
 
+  def self.codemaker_intro
+    puts "\nIn this mode, the computer will try to guess your code."
+    begin
+      print "\nPlease enter your code (four digits 1-6): "
+      code = gets.chomp
+      raise unless Logic.check_input(code, GUESS_PATTERN)
+    rescue StandardError
+      puts INVALID_ENTRY
+      retry
+    end
+    code.split('')
+  end
+
+  def self.codemaker_loop(round, guess, key)
+    puts "\n\nRound ##{round}:"
+    puts "\n Computer guess: "
+    Display.display_code(guess)
+    Display.display_key(key)
+  end
+
   def self.play_again?
     begin
       print "\nWould you like to play again? (y/n) "
@@ -55,12 +75,21 @@ class Text
     again == 'y'
   end
 
-  def self.ending(code, guess, counter)
-    if Logic.won?(code, guess)
-      plural = counter == 1 ? "turn" : "turns"
-      puts "\n\nYou won in #{counter} #{plural}! Well done!"
+  def self.ending(code, guess, counter, codebreaker)
+    if codebreaker
+      if Logic.won?(code, guess)
+        plural = counter == 1 ? "turn" : "turns"
+        puts "\n\nYou won in #{counter} #{plural}! Well done!"
+      else
+        puts "\n\nSo sorry, you lose. Better luck next time!"
+      end
     else
-      puts "\n\nSo sorry, you lose. Better luck next time!"
+      if Logic.won?(code, guess)
+        plural = counter == 1 ? "turn" : "turns"
+        puts "\n\nThe computer won in #{counter} #{plural}!"
+      else
+        puts "\n\n The computer lost. Better luck next time, computer!"
+      end
     end
   end
 end

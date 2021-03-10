@@ -61,17 +61,12 @@ class Logic
       end
     end
 
-    # Guess: 2 1 2 3
-    # Code:  2 2 3 2
-    # KEYS: [0]
-    # Diff: [1, 2, 3]
-    # result: correct position: 1; incorrect_position: 2
-    # Unless diff empty, diff.each { |i| code[diff] ... }
-
-    # puts "\n"
-    # Display.display_code(guess)
     Display.display_key(clues)
     return if Logic.won?(code, guess)
+  end
+
+  def self.codemaker_guess(code)
+    
   end
 
   def self.won?(code, guess)

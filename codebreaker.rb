@@ -6,6 +6,7 @@ class Codebreaker
 
   def self.play
     # Text.codebreaker_intro
+    @codebreaker = true
     @@code = Logic.generate_code
     counter = 1
     Display.display_code(@@code)
@@ -14,13 +15,13 @@ class Codebreaker
       break if game_loop(i + 1)
     end
     # Codebreaker.ending
-    Text.ending(@@code, @@guess, counter)
+    Text.ending(@@code, @@guess, counter, @codebreaker)
   end
 
   def self.game_loop(round_number)
     @@guess = Text.codebreaker_loop(round_number)
     Logic.codebreaker_guess(@@code, @@guess)
-    return Logic.won?(@@code, @@guess)
+    Logic.won?(@@code, @@guess)
   end
 
   def self.ending
