@@ -18,7 +18,7 @@ class Logic
   def self.codebreaker_guess(code, guess)
     keys = []
     already_matched = []
-    clues = { 'correct_position' => 0, 'incorrect_position' => 0 }
+    @clues = { 'correct_position' => 0, 'incorrect_position' => 0 }
     # binding.pry
 
     puts "\n"
@@ -29,7 +29,7 @@ class Logic
     code.each_index do |index|
       if code[index] == guess[index]
         keys << index
-        clues['correct_position'] += 1
+        @clues['correct_position'] += 1
       end
     end
 
@@ -38,22 +38,22 @@ class Logic
     diff = [0, 1, 2, 3].difference(keys)
 
     # make another array of indices we don't want to check and maybe with each iteration check that it's not one of those indices
-    if diff.empty? && clues['correct_position'] != 4
+    if diff.empty? && @clues['correct_position'] != 4
       guess.each do |guess_num|
         code.each_with_index do |code_num, index|
           if !already_matched.include?(index) && guess_num == code_num
-            clues['incorrect_position'] += 1
+            @clues['incorrect_position'] += 1
             already_matched << index
             break
           end
         end
       end
 
-    elsif clues['correct_position'] != 4
+    elsif @clues['correct_position'] != 4
       diff.each do |guess_index|
         diff.each do |code_index|
           if !already_matched.include?(code_index) && code[code_index] == guess[guess_index]
-            clues['incorrect_position'] += 1
+            @clues['incorrect_position'] += 1
             already_matched << code_index
             break
           end
@@ -61,12 +61,20 @@ class Logic
       end
     end
 
-    Display.display_key(clues)
+    Display.display_key(@clues)
     return if Logic.won?(code, guess)
   end
 
-  def self.codemaker_guess(code)
-    
+  def self.codemaker_guess(code, previous_guess, previous_key)
+    # return ['1', '2', '3', '4', {'correct_position' => 4, 'incorect_position' => 0}]
+    # guess = Logic.generate_code if previous_guess.empty?
+    sleep(1)
+    guess = Logic.generate_code
+
+    Logic.codebreaker_guess(code, guess)
+
+    guess << @clues
+    guess
   end
 
   def self.won?(code, guess)
