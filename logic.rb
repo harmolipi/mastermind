@@ -33,7 +33,8 @@ class Logic
       end
     end
 
-    diff = [0, 1, 2, 3].difference(keys)
+    # diff = [0, 1, 2, 3].difference(keys)
+    diff = [0, 1, 2, 3] - keys
 
     if diff.empty? && @clues['correct_position'] != 4
       guess.each do |guess_num|
