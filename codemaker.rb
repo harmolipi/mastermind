@@ -5,6 +5,7 @@ class Codemaker
     @rounds = 12
     @previous_guess = []
     @previous_key = {}
+    Logic.reset
     @code = Text.codemaker_intro
     counter = 1
     Display.display_code(@code)
@@ -18,15 +19,13 @@ class Codemaker
   end
 
   def self.game_loop(round_number)
+    sleep(1)
     puts "\n\nRound #{round_number}:\n"
     @results = Logic.codemaker_guess(@code, @previous_guess, @previous_key)
     @guess = @results.slice(0..3)
-    # p @guess
     @previous_key = @results.slice(4)
-    # p @previous_key
     @previous_guess = @guess
     Logic.won?(@code, @guess)
-    # puts "\n"
   end
 
   def self.ending

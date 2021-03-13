@@ -9,7 +9,7 @@ class Codebreaker
     @codebreaker = true
     @@code = Logic.generate_code
     counter = 1
-    Display.display_code(@@code)
+    # Display.display_code(@@code)
     @@rounds.times do |i|
       counter = i + 1
       break if game_loop(i + 1)

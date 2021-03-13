@@ -1,17 +1,20 @@
 # frozen_string_literal: true
 
 class Logic
+  def self.reset
+    @background = 1
+    @already_guessed = []
+  end
+
   def self.check_input(text, pattern)
     text.match?(pattern)
   end
 
   def self.generate_code
-    # move this to logic class
     code_array = []
     4.times do
       code_array << rand(1..6).to_s
     end
-    # code_array.each { |num| print Display.code_pegs(num) }
     code_array
   end
 
@@ -19,12 +22,9 @@ class Logic
     keys = []
     already_matched = []
     @clues = { 'correct_position' => 0, 'incorrect_position' => 0 }
-    # binding.pry
 
     puts "\n"
     Display.display_code(guess)
-
-    # return if Logic.won?(code, guess)
 
     code.each_index do |index|
       if code[index] == guess[index]
@@ -33,11 +33,8 @@ class Logic
       end
     end
 
-    # return if clues['correct_position'] == 4
-
     diff = [0, 1, 2, 3].difference(keys)
 
-    # make another array of indices we don't want to check and maybe with each iteration check that it's not one of those indices
     if diff.empty? && @clues['correct_position'] != 4
       guess.each do |guess_num|
         code.each_with_index do |code_num, index|
@@ -66,10 +63,23 @@ class Logic
   end
 
   def self.codemaker_guess(code, previous_guess, previous_key)
-    # return ['1', '2', '3', '4', {'correct_position' => 4, 'incorect_position' => 0}]
-    # guess = Logic.generate_code if previous_guess.empty?
-    sleep(1)
-    guess = Logic.generate_code
+    guess = previous_guess
+    @already_guessed << previous_guess.slice(0..3)
+    @keep = previous_key['correct_position'] + previous_key['incorrect_position'] unless previous_key.empty?
+
+    if previous_guess.empty?
+      guess = [@background.to_s, @background.to_s, @background.to_s, @background.to_s]
+    elsif @keep == 4
+      until !@already_guessed.include?(guess)
+        guess.shuffle!
+      end
+    else
+      (0...(4-@keep)).each do |i|
+        guess[i] = @background.to_s
+      end
+    end
+
+    @background += 1
 
     Logic.codebreaker_guess(code, guess)
 

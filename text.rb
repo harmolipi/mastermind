@@ -8,7 +8,10 @@ class Text
 
   def self.intro_text
     puts "\nWelcome to Mastermind!"
-    puts 'To play this game, simply... well, you know what to do.'
+    puts "\nAs Codebreaker, try to guess the secret code."
+    puts "A solid circle (\u25CF) means a digit is in the right position."
+    puts "A hollow circle (\u25CB) means a digit is correct, but in the wrong position."
+    puts "\nAs Codemaker, you make the code, and the computer tries to crack it!"
   end
 
   def self.game_type
