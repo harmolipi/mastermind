@@ -7,7 +7,6 @@ require './codebreaker'
 require './codemaker'
 require './pins'
 require './display'
-require 'pry'
 
 # Game.color
 
