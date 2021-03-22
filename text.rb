@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Text outputs and inputs
 class Text
   INVALID_ENTRY = "\n Invalid choice, please try again."
   ANSWER_PATTERN = /^[12]$/.freeze

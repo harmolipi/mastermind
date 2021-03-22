@@ -8,13 +8,6 @@ require './codemaker'
 require './pins'
 require './display'
 
-# Game.color
-
-# 6.times { |num| puts Display.code_pegs(num.to_s) }
-
-# puts Display.key_pegs('correct_position')
-# puts Display.key_pegs('incorrect_position')
-
 replay = true
 
 while replay

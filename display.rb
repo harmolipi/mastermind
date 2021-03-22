@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Handles displaying information - especially colored pegs and clues
 class Display
   def self.code_pegs(num)
     {

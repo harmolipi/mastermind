@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Methods for when the player is breaking the code
 class Codebreaker
   @@rounds = 12
   @@guess = []

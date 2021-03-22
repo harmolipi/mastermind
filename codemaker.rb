@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Methods for when the computer is guessing the code
 class Codemaker
   def self.play
     @rounds = 12

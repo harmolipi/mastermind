@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Handles the game's logic for both codemaking and codebreaking
 class Logic
   def self.reset
     @background = 1
